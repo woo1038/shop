@@ -1,0 +1,92 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header,
+article {
+  margin-left: 315px;
+  border: 1px solid  blue;
+  padding: 0;
+}
+
+aside {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 315px;
+  height: 100vh;
+  border: 1px solid  red;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* common */
+.title {
+
+}
+
+/* top */
+header nav {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.top-menu {}
+.top-menu .menu {
+  display: flex;
+}
+.top-menu .menu li {
+  margin: 0 10px;
+  
+}
+
+
+/* main */
+.best-items {}
+.best-item {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+.best-item li {
+  border: 1px solid green;
+  aspect-ratio: 1;
+}
+.best-item li:first-child {
+  grid-row: 2 span;
+  grid-column: 2 span;
+}
+
+
+/* side */
+.side-menu {}
+.side-menu .my-menu {
+  display: flex;
+  margin-bottom: 50px;
+}
+.side-menu .my-menu li {
+  margin: 5px;
+}
+.side-menu .full-menu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 50px;
+}
+.side-menu .sns {
+  margin-bottom: 50px;
+}
+.side-menu .search {}
+.side-menu .info {}
+.side-menu .info p {
+  font-size: 8px;
+}
