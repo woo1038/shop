@@ -1,52 +1,19 @@
 <!DOCTYPE html>
 <html lang="UTF-8">
-
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>shopping</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 
-	<link rel="stylesheet" href="./style.css">
-
-	<script src="./main.js"></script>
+  <script src="/js/product.js"></script>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/css/product.css">
 </head>
-
 <body>
-
 	<main>
-		<header class="">
-			<nav class="top-menu">
-				<div class="title">
-					<h1>옷파는 집</h1>
-				</div>
-				<ul class="menu">
-					<li>
-						<span>TOP</span>
-					</li>
-					<li>
-						<span>BOTTOM</span>
-					</li>
-					<li>
-						<span>SHIRT</span>
-					</li>
-					<li>
-						<span>KNIT</span>
-					</li>
-					<li>
-						<span>OUTER</span>
-					</li>
-					<li>
-						<span>SHOES</span>
-					</li>
-					<li>
-						<span>ACC</span>
-					</li>
-				</ul>
-			</nav>
-		</header>
 
-		<aside>
+    <aside>
 			<nav class="side-menu">
 				<ul>
 					<div class="title">
@@ -158,38 +125,58 @@
 		</aside>
 
 		<article>
-			<section class="main-menu best-items">
-				<ul class="best-item">
-					<li onclick="product('best-' + 1)">img1</li>
-					<li onclick="product('best-' + 2)">img2</li>
-					<li>img3</li>
-					<li>img4</li>
-					<li>img5</li>
-					<li>img5</li>
-					<li>img5</li>
-					<li>img5</li>
-					<li>img5</li>
-				</ul>
-			</section>
-			<section class="main-menu banner-items">
-				<div class="title">
-					<h1>NEW ARRIVAL</h1>
-				</div>
-				<ul class="banner-item">
-					<li>img1</li>
-					<li>img2</li>
-					<li>img3</li>
-					<li>img4</li>
-					<li>img5</li>
-					<li>img5</li>
-					<li>img5</li>
-					<li>img5</li>
-					<li>img5</li>
+			<section class="product-items">
+				<ul class="product-item">
+					<li class="product-img">
+            <img src="http://lookple.com/web/product/big/20200501/85bd6746e6604d3852747eab2c97d398.jpg" alt="">
+          </li>
+
+          <li class="product-text">
+            <h4 class="product-name">상품 이름</h4>
+            <table class="product-table">
+              <tr>
+                <th>판매가</th>
+                <td class="product-price">판매 가격</td>
+              </tr>
+              <tr>
+                <th>상품요약정보</th>
+                <td class="product-summary">상품 정보aaaaaaaaaaaaaaaaa</td>
+              </tr>
+              <tr>
+                <th>상품설명</th>
+                <td class="product-info">상품 설명</td>
+              </tr>
+            </table>
+            <table class="product-table">
+              <tr>
+                <th>사이즈</th>
+                <td class="product-size">
+                  <div class="product-box">250</div>
+                  <div class="product-box">260</div>
+                </td>
+              </tr>
+              <tr>
+                <th>색상</th>
+                <td class="product-color">
+                  <div class="product-box">red</div>
+                  <div class="product-box">blue</div>
+                </td>
+              </tr>
+            </table>
+            <div class="product-total">
+              가격
+            </div>
+            <ul class="product-btn">
+              <li>바로 구매</li>
+              <li>카트</li>
+              <li>관심 상품</li>
+            </ul>
+          </li>
 				</ul>
 			</section>
 		</article>
+
+		
 	</main>
-
 </body>
-
 </html>
