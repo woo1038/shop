@@ -1,6 +1,9 @@
 /* color set */
 :root {
   --primary: #424242;
+  --active: #0a5aee;
+  --hover: #719ae6;
+  --disable: #dbdbdb;
 }
 
 .product-items {
@@ -49,10 +52,22 @@
 }
 .product-table .product-box {
   width: 50px;
+  padding: 3px 0;
   text-align: center;
-  border: 1px solid var(var(--primary));
+  border: 1px solid var(--primary);
   margin-right: 5px;
   cursor: pointer;
+}
+.product-table .product-box:hover {
+  background-color: var(--hover);
+}
+.product-table .product-box.disable {
+  background-color: var(--disable);
+  color: #8a8a8a;
+}
+.product-table .product-box.active {
+  background-color: var(--active);
+  color: #fff;
 }
 .product-total {
   display: flex;
