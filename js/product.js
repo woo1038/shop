@@ -1,6 +1,7 @@
 window.onload = function() {
 
   let id_cnt = 0;
+  let catch_count = 0;
 
   let now_item = get_cookie('now');
   let item = get_cookie(now_item).split('/');
@@ -26,7 +27,7 @@ window.onload = function() {
 
   create_box(size, "size", 1);
   create_box(color, "color", 1);
-
+  
   product_size.addEventListener("click",function(e){
     active_click(e, this, "size");
     set_cookie("option-1", e.target.innerHTML);
@@ -35,19 +36,23 @@ window.onload = function() {
       product_color.children[i].classList.remove("disable");
     }
 
+    catch_count = 1;
+  });
 
-    product_color.addEventListener("click", function(e) {
+
+  product_color.addEventListener("click", function(e) {
+    if(catch_count == 1) {
       active_click(e, this, "color");
       set_cookie("option-2", e.target.innerHTML);
-
+  
       id_cnt++;
       create_box(id_cnt, item, 2);
+    }
 
-      /* total */
-      // let total_price = document.querySelector('.total-price');
-      // total_price.innerHTML = parseInt(total_price.innerHTML).toLocaleString('ko-KR');
-    })
-  });
+    /* total */
+    // let total_price = document.querySelector('.total-price');
+    // total_price.innerHTML = parseInt(total_price.innerHTML).toLocaleString('ko-KR');
+  })
 }
 
 
@@ -178,7 +183,7 @@ function upclick(cnt) {
   let input = item.children[1].children[0];
   let label_price = item.children[3];
   let product_price = get_cookie(get_cookie('now').split('/')[0]).split('/')[1];
-  
+
   input.value++;
   label_price.innerHTML = input.value * product_price;
 
