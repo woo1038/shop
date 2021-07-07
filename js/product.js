@@ -1,6 +1,6 @@
 window.onload = function() {
 
-  let click_cnt = 0;
+  let id_cnt = 0;
 
   let now_item = get_cookie('now');
   let item = get_cookie(now_item).split('/');
@@ -24,40 +24,127 @@ window.onload = function() {
   product_summary.innerHTML = summary;
   product_info.innerHTML = info;
 
-  create_box(size, "size");
-  create_box(color, "color");
+  create_box(size, "size", 1);
+  create_box(color, "color", 1);
 
   product_size.addEventListener("click",function(e){
     active_click(e, this, "size");
-    
+    set_cookie("option-1", e.target.innerHTML);
+
     for(let i=0; i<product_color.childElementCount; i++) {
       product_color.children[i].classList.remove("disable");
     }
+
+
     product_color.addEventListener("click", function(e) {
       active_click(e, this, "color");
+      set_cookie("option-2", e.target.innerHTML);
 
-      /* 이곳에 코딩 진행하세요 */
+      id_cnt++;
+      create_box(id_cnt, item, 2);
+
+      /* total */
+      // let total_price = document.querySelector('.total-price');
+      // total_price.innerHTML = parseInt(total_price.innerHTML).toLocaleString('ko-KR');
     })
   });
-
 }
 
-function create_box(cnt, name) {
-  
-  for(let i=0; i<cnt.length; i++) {
-    let box = document.querySelector('.product-' + name);
-    let div = document.createElement('div');
-    if(name == "color") {
-      div.className = "product-box disable";
-    }else {
-      div.className = "product-box";
-    }
-    div.innerHTML = cnt[i];
 
-    box.appendChild(div);
+/* ######################### create layout ######################### */
+function create_box(cnt, name, key) {
+  switch (key) {
+    case 1:
+          for(let i=0; i<cnt.length; i++) {
+            let box = document.querySelector('.product-' + name);
+            let div = document.createElement('div');
+            if(name == "color") {
+              div.className = "product-box disable";
+            }else {
+              div.className = "product-box";
+            }
+            div.innerHTML = cnt[i];
+        
+            box.appendChild(div);
+          }
+      break;
+
+    case 2:
+          let items = document.querySelector('.product-items');
+          
+          let li = document.createElement("li");
+          let div = document.createElement("div");
+          let h5 = document.createElement("h5");
+          let p = document.createElement("p");
+          let span = document.createElement("span");
+          let input = document.createElement("input");
+          let label = document.createElement("label");
+          let product_name = name[0];
+          let product_price = name[1];
+
+          /* arr join */
+          let option_1 = get_cookie("option-1");
+          let option_2 = get_cookie("option-2");
+          let option_arr = [];
+          option_arr.push(option_1);
+          option_arr.push(option_2);
+          option_arr.join('/')
+
+          li.classList.add("product-item");
+          li.id = "item-" + cnt;
+          items.appendChild(li);
+
+          h5.innerHTML = product_name;
+          p.innerHTML = "- " + option_arr;
+          div.appendChild(h5);
+          div.appendChild(p);
+          li.appendChild(div);
+
+          input.type = "text";
+          input.value = 1;
+          span.appendChild(input);
+
+          for(let i=0; i<3; i++) {
+            let button = document.createElement("button");
+            let a = document.createElement("a");
+            switch (i) {
+              case 0:
+                  button.classList.add("up-bth");
+                  button.setAttribute("onclick", "upclick(" + cnt + ")");
+                  a.href = "#none";
+                  a.innerHTML = "▲";
+                  button.append(a);
+                  span.appendChild(button);
+                  li.appendChild(span);
+                break;
+              case 1:
+                  button.classList.add("down-bth");
+                  button.setAttribute("onclick", "downclick(" + cnt + ")");
+                  a.href = "#none";
+                  a.innerHTML = "▼";
+                  button.append(a);
+                  span.appendChild(button);
+                  li.appendChild(span);
+                  break;
+              case 2:
+                  a.href = "#none";
+                  a.innerHTML = "x";
+                  button.appendChild(a);
+                  li.appendChild(button);
+                break;
+            }
+          }
+
+          label.innerHTML = product_price;
+          li.appendChild(label);
+      break;
   }
+  
 }
 
+
+
+/* ######################### sibling element select ######################### */
 function siblings(t) {
   var children = t.parentElement.children;
   var tempArr = [];
@@ -73,9 +160,7 @@ function siblings(t) {
 
 
 
-
-
-
+/* ######################### click function ######################### */
 function active_click(e, it, name) {
   e.target.classList.add('active');
     
@@ -88,17 +173,34 @@ function active_click(e, it, name) {
 }
 
 
+function upclick(cnt) {
+  let item = document.getElementById("item-" + cnt);
+  let input = item.children[1].children[0];
+  let label_price = item.children[3];
+  let product_price = get_cookie(get_cookie('now').split('/')[0]).split('/')[1];
+  
+  input.value++;
+  label_price.innerHTML = input.value * product_price;
+
+}
+function downclick(cnt) {
+  let item = document.getElementById("item-" + cnt);
+  let input = item.children[1].children[0];
+  let label_price = item.children[3];
+  let product_price = get_cookie(get_cookie('now').split('/')[0]).split('/')[1];
+
+  if (input.value > 1) {
+    input.value--;
+    label_price.innerHTML = input.value * product_price;
+  }
+}
 
 
 
 
 
 
-
-
-
-
-
+/* ######################### cookie ######################### */
 function set_cookie(name, value) {
   document.cookie = name + "=" + value;
 }

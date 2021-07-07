@@ -6,25 +6,41 @@
   --disable: #dbdbdb;
 }
 
-.product-items {
+/* common */
+.fonz-10 {
+  font-size: 10px;
+}
+.fonz-12 {
+  font-size: 12px;
+}
+.fonz-14 {
+  font-size: 14px;
+}
+.fonz-bold {
+  font-weight: bold;
+}
+
+
+.product-section {
   max-width: 1200px;
   margin: 0 auto;
 }
-.product-item {
+.product-inner {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   padding: 50px 0;
 }
 
 /* image */
-.product-item .product-img {
+.product-inner .product-img {
   
 }
-.product-item .product-img img {
+.product-inner .product-img img {
   max-width: 100%;
   min-width: 500px;
   padding-left: 10%;
 }
+
 /* text */
 .product-text {
   max-width: 400px;
@@ -33,6 +49,8 @@
 .product-name {
   text-align: center;
 }
+
+/* table */
 .product-table {
   min-width: 100%;
   padding: 10px 0;
@@ -69,13 +87,83 @@
   background-color: var(--active);
   color: #fff;
 }
+
+/* items */
+.product-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--primary);
+}
+.product-item div {
+  max-width: 212px;
+  padding-right: 5px;
+  flex: 5;
+}
+.product-item div h5 {
+  margin: 5px 0;
+  line-break: anywhere;
+}
+.product-item div p {
+  margin: 5px 0;
+}
+.product-item span {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  padding: 1px;
+  background-color: #000;
+  flex: 1;
+}
+.product-item span input {
+  grid-row: 2 span;
+  width: 30px;
+  border: none;
+}
+.product-item span button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  height: 10px;
+  padding: 3px;
+  border: none;
+  background-color: #fff;
+}
+.product-item span button a {
+  transform: scale(0.8);
+  color: var(--primary);
+}
+.product-item > button {
+  width: 15px;
+  height: 15px;
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0%;
+  border: 1px solid #000;
+  background-color: #fff;
+}
+.product-item > button > a {
+  transform: scale(0.8);
+}
+.product-item label {
+  flex: 2;
+  text-align: center;
+}
+
+/* total */
 .product-total {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: baseline;
   padding-top: 40px;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--primary);
+}
+.product-total span:nth-child(2) {
+  margin-left: 10px;
+  margin-right: 3px;
 }
 .product-btn {
   display: grid;
