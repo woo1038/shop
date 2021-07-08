@@ -6,6 +6,13 @@
   --disable: #dbdbdb;
 }
 
+/* Reset type number 경우 옆에 증가 감소 아이콘 삭제 */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 /* common */
 .fonz-10 {
   font-size: 10px;
@@ -19,7 +26,6 @@
 .fonz-bold {
   font-weight: bold;
 }
-
 
 .product-section {
   max-width: 1200px;
@@ -149,7 +155,7 @@
 }
 .product-item label {
   flex: 2;
-  text-align: center;
+  text-align: right;
 }
 
 /* total */

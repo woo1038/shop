@@ -1,3 +1,5 @@
+
+
 window.onload = function() {
 
   let id_cnt = 0;
@@ -52,9 +54,12 @@ window.onload = function() {
     /* total */
     // let total_price = document.querySelector('.total-price');
     // total_price.innerHTML = parseInt(total_price.innerHTML).toLocaleString('ko-KR');
-  })
-}
+    total_price_all();
 
+
+  })
+
+}
 
 /* ######################### create layout ######################### */
 function create_box(cnt, name, key) {
@@ -105,6 +110,8 @@ function create_box(cnt, name, key) {
           div.appendChild(p);
           li.appendChild(div);
 
+          input.setAttribute("onkeyup", "enterkey(this)");
+          input.setAttribute("onblur", "price(" + cnt + ")");
           input.type = "text";
           input.value = 1;
           span.appendChild(input);
@@ -132,6 +139,7 @@ function create_box(cnt, name, key) {
                   li.appendChild(span);
                   break;
               case 2:
+                  button.setAttribute("onclick", "remove(" + cnt + ")");
                   a.href = "#none";
                   a.innerHTML = "x";
                   button.appendChild(a);
@@ -186,8 +194,9 @@ function upclick(cnt) {
 
   input.value++;
   label_price.innerHTML = input.value * product_price;
-
+  total_price_all();
 }
+
 function downclick(cnt) {
   let item = document.getElementById("item-" + cnt);
   let input = item.children[1].children[0];
@@ -197,11 +206,51 @@ function downclick(cnt) {
   if (input.value > 1) {
     input.value--;
     label_price.innerHTML = input.value * product_price;
+    total_price_all();
   }
+}
+
+function remove(cnt) {
+  let item = document.getElementById("item-" + cnt);
+  item.remove();
+
+  total_price_all();
 }
 
 
 
+/* ######################### onblur ######################### */
+function price(cnt) {
+  let item = document.getElementById("item-" + cnt);
+  let input = item.children[1].children[0];
+  let label_price = item.children[3];
+  let product_price = get_cookie(get_cookie('now').split('/')[0]).split('/')[1];
+
+  label_price.innerHTML = input.value * product_price;
+  total_price_all();
+}
+
+
+/* ######################### key press ######################### */
+function enterkey(e) {
+  if (window.event.keyCode == 13) {
+    e.blur();
+  }
+}
+
+/* ######################### checking ######################### */
+function total_price_all() {
+  let item = document.querySelectorAll('.product-item');
+  let total_price = document.querySelector('.total-price');
+  let total = 0;
+
+  
+  for(let i=0; i<item.length; i++) {
+    total += parseInt(item[i].children[3].innerHTML);
+  }
+
+  total_price.innerHTML = total;  
+}
 
 
 
