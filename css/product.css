@@ -4,6 +4,7 @@
   --active: #0a5aee;
   --hover: #719ae6;
   --disable: #dbdbdb;
+  --remove: #f14b4b;
 }
 
 /* Reset type number 경우 옆에 증가 감소 아이콘 삭제 */
@@ -69,6 +70,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 .product-table th {
   width: 100px;
+  word-break: keep-all;
 }
 .product-table td {
   display: flex;
@@ -129,29 +131,41 @@ input[type="number"]::-webkit-inner-spin-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
   height: 10px;
   padding: 3px;
   border: none;
   background-color: #fff;
+  font-size: 10px;
+}
+.product-item span button:hover {
+  background-color: var(--disable);
+  transition: .3s;
 }
 .product-item span button a {
   transform: scale(0.8);
   color: var(--primary);
 }
 .product-item > button {
-  width: 15px;
-  height: 15px;
-  margin-left: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0%;
+  width: 15px;
+  height: 15px;
+  margin-left: 15px;
   border: 1px solid #000;
+  border-radius: 0%;
   background-color: #fff;
+}
+.product-item > button:hover{
+  background-color: var(--remove);
+  transition: .3s;
 }
 .product-item > button > a {
   transform: scale(0.8);
+}
+.product-item > button:hover > a {
+  color: #fff;
+  transition: .3s;
 }
 .product-item label {
   flex: 2;
@@ -187,4 +201,13 @@ input[type="number"]::-webkit-inner-spin-button {
   text-align: center;
   border: 1px solid var(--primary);
   cursor: pointer;
+}
+.product-btn li:hover {
+  background-color: var(--disable);
+  transition: .3s;
+}
+.product-btn li:first-child:hover {
+  background-color: #000;
+  color: #fff;
+  transition: .3s;
 }

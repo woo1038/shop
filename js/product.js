@@ -2,8 +2,9 @@
 
 window.onload = function() {
 
-  let id_cnt = 0;
-  let catch_count = 0;
+  let id_cnt = 0;             // id 증감 변수
+  let catch_count = 0;        // 옵션 2 먼저 선택 불가하도록 만든 변수
+
 
   let now_item = get_cookie('now');
   let item = get_cookie(now_item).split('/');
@@ -21,6 +22,7 @@ window.onload = function() {
   let product_info = document.querySelector('.product-info');
   let product_size = document.querySelector('.product-size');
   let product_color = document.querySelector('.product-color');
+  let product_items = document.querySelector('.product-items');
 
   product_name.innerHTML = name;
   product_price.innerHTML = price;
@@ -30,35 +32,58 @@ window.onload = function() {
   create_box(size, "size", 1);
   create_box(color, "color", 1);
   
+
   product_size.addEventListener("click",function(e){
-    active_click(e, this, "size");
-    set_cookie("option-1", e.target.innerHTML);
-
-    for(let i=0; i<product_color.childElementCount; i++) {
-      product_color.children[i].classList.remove("disable");
+    if(e.target.className != "product-size") {
+      console.log();
+      active_click(e, this, "size");
+      set_cookie("option-1", e.target.innerHTML);
+  
+      for(let i=0; i<product_color.childElementCount; i++) {
+        product_color.children[i].classList.remove("disable");
+      }
+  
+      catch_count = 1;
     }
-
-    catch_count = 1;
   });
 
 
   product_color.addEventListener("click", function(e) {
-    if(catch_count == 1) {
-      active_click(e, this, "color");
-      set_cookie("option-2", e.target.innerHTML);
-  
-      id_cnt++;
-      create_box(id_cnt, item, 2);
-    }
+    
+    if (e.target.className != "product-color") {
+      let check = true; // 중복 체크 변수
 
+      let product_item = product_items.children;
+
+      if (catch_count == 1) {
+        set_cookie("option-2", e.target.innerHTML);
+
+        let option_1 = get_cookie("option-1");
+        let option_2 = get_cookie("option-2");
+        let option = option_1.concat(",", option_2);
+
+        for (let i = 0; i < product_item.length; i++) {
+          if (option == product_item[i].children[0].children[1].innerHTML.split(' ')[1]) {
+            alert("이미 선택한 상품입니다.")
+            check = false;
+          }
+        }
+
+
+        if (check) {
+          active_click(e, this, "color");
+
+          id_cnt++;
+          create_box(id_cnt, item, 2);
+        }
+        total_price_all();
+        total_count_all();
+      }
+    }
     /* total */
     // let total_price = document.querySelector('.total-price');
     // total_price.innerHTML = parseInt(total_price.innerHTML).toLocaleString('ko-KR');
-    total_price_all();
-
-
   })
-
 }
 
 /* ######################### create layout ######################### */
@@ -195,6 +220,7 @@ function upclick(cnt) {
   input.value++;
   label_price.innerHTML = input.value * product_price;
   total_price_all();
+  total_count_all();
 }
 
 function downclick(cnt) {
@@ -207,6 +233,7 @@ function downclick(cnt) {
     input.value--;
     label_price.innerHTML = input.value * product_price;
     total_price_all();
+    total_count_all();
   }
 }
 
@@ -215,6 +242,7 @@ function remove(cnt) {
   item.remove();
 
   total_price_all();
+  total_count_all();
 }
 
 
@@ -228,6 +256,7 @@ function price(cnt) {
 
   label_price.innerHTML = input.value * product_price;
   total_price_all();
+  total_count_all();
 }
 
 
@@ -250,6 +279,19 @@ function total_price_all() {
   }
 
   total_price.innerHTML = total;  
+}
+
+function total_count_all() {
+  let item = document.querySelectorAll('.product-item');
+  let total_count = document.querySelector('.total-count');
+  let count = 0;
+
+  
+  for(let i=0; i<item.length; i++) {
+    count += parseInt(item[i].children[1].children[0].value);
+  }
+
+  total_count.innerHTML = "(" + count + "개)";
 }
 
 
