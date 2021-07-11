@@ -244,11 +244,14 @@ aside {
 /* main */
 .best-items {}
 .best-item {
-  display: grid;
+  display: none;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 10px;
   padding: 10px;
+}
+.best-item.active {
+  display: grid;
 }
 .best-item li {
   border: 1px solid green;

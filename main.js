@@ -1,3 +1,21 @@
+window.onload = function() {
+  const best_btn = document.querySelectorAll(".best-btn");
+  
+  for(const button of best_btn) {
+    button.addEventListener("click", function(e) {
+      best_btn.forEach((e) => e.children[0].classList.remove("active"));
+      e.target.classList.add("active");
+      
+      let tab_item = document.querySelector("." + e.target.getAttribute("button"));
+      // console.log([...tab_item.parentElement.children].map(e=>e.classList.remove("active")));
+      Array.from(tab_item.parentElement.children).map(e=>e.classList.remove("active"));
+      tab_item.classList.add("active");
+
+    })
+  }
+}
+
+
 function product(cnt) {
   location.href= 'html/product.html';
   now_cookie("now", cnt);
