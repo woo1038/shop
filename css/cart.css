@@ -1,0 +1,221 @@
+/* color set */
+:root {
+  --primary: #424242;
+  --active: #0a5aee;
+  --hover: #719ae6;
+  --disable: #dbdbdb;
+  --bggary: #c3c3c3;
+  --remove: #f14b4b;
+  --bdtable: #a0a0a0;
+}
+
+/* Reset type number 경우 옆에 증가 감소 아이콘 삭제 */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+p {
+  margin: 0;
+}
+
+/* common */
+.fonz-10 {
+  font-size: 10px;
+}
+.fonz-12 {
+  font-size: 12px;
+}
+.fonz-14 {
+  font-size: 14px;
+}
+.fonz-bold {
+  font-weight: bold;
+}
+.bg-gray {
+  background-color: var(--bggary);
+}
+
+.cart-section {
+  padding: 20px;
+}
+.list-table {
+  border: 2px solid var(--bdtable);
+  width: 100%;
+  border-spacing: 0px;
+  margin-bottom: 100px;
+  border-collapse: collapse;
+}
+/* list layout width */
+.list-table th:nth-child(1) {
+  width: 38px;
+}
+.list-table th:nth-child(2) {
+  width: 110px;
+}
+.list-table th:nth-child(3) {
+  width: auto;
+}
+.list-table th:nth-child(4) {
+  width: 98px;
+}
+.list-table th:nth-child(5) {
+  width: 75px;
+}
+.list-table th:nth-child(6) {
+  width: 98px;
+}
+.list-table th:nth-child(7) {
+  width: 98px;
+}
+.list-table th:nth-child(8) {
+  width: 85px;
+}
+.list-table th:nth-child(9) {
+  width: 98px;
+}
+.list-table th:nth-child(10) {
+  width: 150px;
+}
+
+/* list layout width */
+
+.list-table th,
+.list-table td {
+  text-align: center;
+}
+.list-table th {
+  border: 1px solid var(--bdtable);
+  padding: 7px;
+}
+.list-table .list-item td {
+  border: 1px solid var(--bdtable);
+}
+.list-table .list-item td:nth-child(1),
+.list-table .list-item td:nth-child(2),
+.list-table .list-item td:nth-child(3),
+.list-table .list-item td:last-child {
+  border-right: none;
+  border-left: none;
+}
+.list-table .list-item:last-child td {
+  border-bottom: none;
+}
+.list-table .list-item td {
+  padding: 5px;
+}
+.list-table .list-item .cart-img img {
+  max-width: 100px;
+}
+.list-table .list-item .cart-info {
+  text-align: left;
+}
+.list-table .list-item .count-div {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  padding: 1px;
+  background-color: #000;
+  flex: 1;
+}
+.list-table .list-item .count-div input {
+  grid-row: 2 span;
+  width: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+.list-table .list-item .count-div button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10px;
+  padding: 3px;
+  border: none;
+  background-color: #fff;
+  font-size: 10px;
+}
+.list-table .item-btn {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 3px 0;
+}
+.list-table .item-btn li {
+  padding: 3px 0;
+  border: 1px solid var(--bdtable);
+  border-radius: 3px;
+}
+.list-table .item-btn li:first-child {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+
+.price-table {
+  border: 2px solid #000;
+  width: 100%;
+  margin-bottom: 50px;
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+.price-table th,
+.price-table td {
+  text-align: center;
+  border: 1px solid var(--bdtable);
+  padding: 20px;
+}
+.price-table th {
+  background-color: var(--bggary);
+}
+.price-table th:not(:last-child) {
+  width: 250px;
+}
+.price-table td {
+  font-weight: bold;
+}
+.price-table td:last-child {
+  color: var(--active);
+}
+.price-table td div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.price-table td span {
+  font-size: 25px;
+}
+.price-table td label {
+  align-self: flex-end;
+}
+
+
+.cart-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cart-btn li {
+  padding: 10px 20px;
+  border: 1px solid rgb(88, 88, 88);
+  border-radius: 3px;
+  font-size: 20px;
+}
+.cart-btn li:nth-child(1) {
+  background-color: rgb(71, 71, 71);
+  color: #fff;
+  margin-right: 5px;
+}
+.cart-btn li:nth-child(2) {
+  background-color: rgb(124, 124, 124);
+  color: #fff;
+}
+.cart-btn li:nth-child(3) {
+  position: absolute;
+  right: 0;
+}
+
+.cart-btn li:nth-child(1) a,
+.cart-btn li:nth-child(2) a {
+  color: #fff;
+}

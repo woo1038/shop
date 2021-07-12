@@ -56,5 +56,13 @@
 2. main top 메뉴 클릭시 tab 창 변경 되도록 변경
 3. active 추가 하여 새로운 창 보여주도록 설정
 
+================= 2021. 07. 12  =================
+1. cart html 생성
+2. cart 상품 list layout table로 생성 작업
+3. cart 상품 total price layout 작업
+4. 전체적인 cart layout 작업 완료
+5. main page에서 cart href 연동 완료
+
+
 내일할일
 카트 만들기

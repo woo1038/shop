@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="UTF-8">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script src="/js/cart.js"></script>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/css/cart.css">
+</head>
+<body>
+	<main>
+
+
+    <aside>
+			<nav class="side-menu">
+				<ul>
+					<div class="title">
+						<h1><a class="side-title" href="/index.html">옷파는 집</a></h1>
+					</div>
+					<ul class="my-menu">
+						<li>
+							<a href="/login">LOGIN</a>
+						</li>
+						<li>
+							<a href="/join">
+								JOIN
+							</a>
+						</li>
+						<li>
+							<a href="/cart">CART</a>
+						</li>
+						<li>
+							<a href="/order">ORDER</a>
+						</li>
+						<li>
+							<a href="/mypage">MYPAGE</a>
+						</li>
+					</ul>
+					<ul class="full-menu">
+						<li>
+							<h5>CATEGORY</h5>
+						</li>
+						<li>
+							<h5>COMMUNITY</h5>
+						</li>
+						<li>
+							<a href="/best">BEST</a>
+						</li>
+						<li>
+							<a href="/notice">NOTICE</a>
+						</li>
+						<li>
+							<a href="/new">NEW 5%</a>
+						</li>
+						<li>
+							<a href="/faq">FAQ</a>
+						</li>
+						<li>
+							<a href="/outer">OUTER</a>
+						</li>
+						<li>
+							<a href="/qa">Q&A</a>
+						</li>
+						<li>
+							<a href="/shit">SUIT</a>
+						</li>
+						<li>
+							<a href="/review">REVIEW</a>
+						</li>
+						<li>
+							<a href="/shirt">SHIRT</a>
+						</li>
+						<li>
+							<a href="/membership">MEMBERSHIP</a>
+						</li>
+						<li>
+							<a href="/top">TOP</a>
+						</li>
+						<li>
+							<a href="/knit">KNIT</a>
+						</li>
+						<li>
+							<a href="/bookmark">BOOKMARK</a>
+						</li>
+						<li>
+							<a href="/bootom">BOTTOM</a>
+						</li>
+						<li>
+							<a href="/today">TODAY VIEW</a>
+						</li>
+						<li>
+							<a href="/shoes">SHOES</a>
+						</li>
+						<li>
+							<a href="/acc">ACC</a>
+						</li>
+						<li>
+							<a href="/event">1+1 EVENT</a>
+						</li>
+					</ul>
+					<div class="sns">
+						<ul>
+							<li>
+								<a href="/instagram"><i class="fa fa-instagram" aria-hidden="true"></i>INSTAGRAM</a>
+							</li>
+							<li>
+								<a href="/facebook"><i class="fa fa-facebook-square" aria-hidden="true"></i>FACEBOOK</a>
+							</li>
+						</ul>
+					</div>
+					<div class="search">
+						<form action="">
+							<fieldset class="search-field">
+								<legend>검색</legend>
+								<input type="text">
+								<i class="fa fa-search" aria-hidden="true"></i>
+							</fieldset>
+						</form>
+					</div>
+					<div class="info">
+						<h4 class="phone">T. 123-4567-8910</h4>
+						<p>
+							월요일 ~ 금요일 13:00pm ~ 19:00pm<br>
+							금요일 ~ 일요일 off
+							
+						</p>
+						<p>
+							예금주. 김우혁(옷파는 집)<br>
+							국민: 01234-01-45678
+						</p>
+						<p>
+							교환/반품배송비 전용계좌<br>
+							예금주. 김우혁(옷파는 집)<br>
+							국민: 01234-01-45678
+						</p>
+					</div>
+				</ul>
+			</nav>
+		</aside>
+
+		<article>
+			<section class="cart-section">
+				<div class="sub-title">
+					<h2>장바구니</h2>
+				</div>
+				<table class="list-table">
+					<tr class="bg-gray">
+						<th>
+							<input type="checkbox" name="check" id="check_all">
+						</th>
+						<th>이미지</th>
+						<th>상품정보</th>
+						<th>판매가</th>
+						<th>수량</th>
+						<th>적립금</th>
+						<th>배송구분</th>
+						<th>배송비</th>
+						<th>합계</th>
+						<th>선택</th>
+					</tr>
+					<tr class="list-item">
+						<td>
+							<div>
+								<input type="checkbox" name="check" id="check_all">
+							</div>
+						</td>
+						<td class="cart-img">
+							<div>
+								<img src="http://lookple.com/web/product/tiny/20200501/623f9ebb2f116d41a4902a96ee78c885.jpg" alt="">
+							</div>
+						</td>
+						<td class="cart-info">
+							<div>
+								<a href="#none">상품정보</a>
+								<p>[옵션: <span>250/블랙</span>]</p>
+							</div>
+						</td>
+						<td class="cart-price">
+							<div>34000</div>
+						</td>
+						<td class="cart-count">
+							<div class="count-div">
+								<input onkeyup="enterkey(this)" onblur="price(1)" type="text">
+								<button class="up-bth" onclick="upclick(1)"><a href="#none">▲</a></button>
+								<button class="down-bth" onclick="downclick(1)"><a href="#none">▼</a></button>
+							</div>
+						</td>
+						<td>
+							<div>30원</div>
+						</td>
+						<td>
+							<div>기본배송</div>
+						</td>
+						<td>
+							<div>무료</div>
+						</td>
+						<td>
+							<div>34000</div>
+						</td>
+						<td>
+							<ul class="item-btn">
+								<li>주문하기</li>
+								<li>관심상품등록</li>
+								<li>삭제</li>
+							</ul>
+						</td>
+					</tr>
+					<tr class="list-item">
+						<td>
+							<div>
+								<input type="checkbox" name="check" id="check_all">
+							</div>
+						</td>
+						<td class="cart-img">
+							<div>
+								<img src="http://lookple.com/web/product/tiny/20200501/623f9ebb2f116d41a4902a96ee78c885.jpg" alt="">
+							</div>
+						</td>
+						<td class="cart-info">
+							<div>
+								<a href="#none">상품정보</a>
+								<p>[옵션: <span>250/블랙</span>]</p>
+							</div>
+						</td>
+						<td class="cart-price">
+							<div>34000</div>
+						</td>
+						<td class="cart-count">
+							<div class="count-div">
+								<input onkeyup="enterkey(this)" onblur="price(1)" type="text">
+								<button class="up-bth" onclick="upclick(1)"><a href="#none">▲</a></button>
+								<button class="down-bth" onclick="downclick(1)"><a href="#none">▼</a></button>
+							</div>
+						</td>
+						<td>
+							<div>30원</div>
+						</td>
+						<td>
+							<div>기본배송</div>
+						</td>
+						<td>
+							<div>무료</div>
+						</td>
+						<td>
+							<div>34000</div>
+						</td>
+						<td>
+							<ul class="item-btn">
+								<li>주문하기</li>
+								<li>관심상품등록</li>
+								<li>삭제</li>
+							</ul>
+						</td>
+					</tr>
+				</table>
+				<table class="price-table">
+					<tr>
+						<th>총 상품금액</th>
+						<th>총 배송비</th>
+						<th>결제예정금액</th>
+					</tr>
+					<tr>
+						<td>
+							<div>
+								<span>10000</span><label>원</label>
+							</div>
+						</td>
+						<td>
+							<div>
+								+ <span>2500</span><label>원</label>
+							</div>
+						</td>
+						<td>
+							<div>
+								=<span>12500</span><label>원</label>
+							</div>
+						</td>
+					</tr>
+				</table>
+				
+				<ul class="cart-btn">
+					<li>
+						<a href="#none">전체상품주문</a>
+					</li>
+					<li>
+						<a href="#none">선택상품주문</a>
+					</li>
+					<li>
+						<a href="#none">쇼핑계속하기</a>
+					</li>
+				</ul>
+			</section>
+		</article>
+
+		
+	</main>
+</body>
+</html>

@@ -54,12 +54,21 @@ a {
 button {
   cursor: pointer;
 }
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
 
 /* common */
 .title {
 
 }
-
+.sub-title {
+  border-bottom: 1px solid var(--disable);
+  margin-bottom: 50px;
+  padding-bottom: 10px;
+  font-size: 14px;
+  color: var(--primary);
+}
 
 
 

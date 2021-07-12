@@ -1,5 +1,3 @@
-
-
 window.onload = function() {
 
   let id_cnt = 0;             // id 증감 변수
