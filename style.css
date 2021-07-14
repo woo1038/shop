@@ -59,9 +59,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* common */
-.title {
-
-}
 .sub-title {
   border-bottom: 1px solid var(--disable);
   margin-bottom: 50px;
@@ -82,7 +79,9 @@ header nav {
   padding-bottom: 20px;
   
 }
-.top-menu {}
+.top-menu .title {
+  margin: 20px 0;
+}
 .top-menu .menu {
   display: flex;
 }
@@ -114,6 +113,7 @@ header nav {
 
 /* side */
 aside {
+  position: fixed;
   background-color: #eeeeee;
 }
 .side-menu {
