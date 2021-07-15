@@ -96,25 +96,50 @@ window.onload = function() {
   add_cart.addEventListener("click", function() {
     let get_name = get_cookie("now");
     let get_arr = [];
+    let cart_item = JSON.parse(localStorage.getItem('cart'));
+    var oldItems = cart_item || [];
+    let differ = true;
+
     Array.from(product_items.children).map((e) => {
       get_arr.push(e.children[0].children[1].innerHTML.split(' ')[1].concat(",",e.children[1].children[0].value))
     });
 
-    var oldItems = JSON.parse(localStorage.getItem('cart')) || [];
-    arr = {
-          "name": get_name, 
-          "option" : get_arr.sort()
+    if (get_arr.length >= 1) {
+      console.log(1);
+      if (cart_item == null) {
+        localStorage.setItem('cart', 0)
+      } else {
+        for(var i=0; i<cart_item.length; i++) {
+          if(cart_item[i].name == get_cookie("now")) {
+            let old_item = cart_item[i].option;
+            let new_item = get_arr;
+            let arr_item = old_item.concat(new_item);
+            let uni_item = arr_item.filter((item, pos) => arr_item.indexOf(item) === pos);
+            
+            cart_item[i].option = uni_item;
+            console.log(uni_item);
+
+            arr = {
+              "name": get_name, 
+              "option" : uni_item.sort()
+            }
+            localStorage.setItem('cart', JSON.stringify(oldItems));
+            differ = false;
+            break;
+          } 
         }
-    
-    oldItems.push(arr);
-    localStorage.setItem('cart', JSON.stringify(oldItems));
-    console.log(oldItems);
-    // let object = {
-    //                 "name": get_name, 
-    //                 "option" : get_arr.sort()
-    //               };
-    // localStorage.setItem("cart", JSON.stringify(object))
-    // console.log(JSON.parse(localStorage.getItem("cart")));
+        if(differ) {
+          arr = {
+            "name": get_name, 
+            "option" : get_arr.sort()
+          }
+          oldItems.push(arr);
+          localStorage.setItem('cart', JSON.stringify(oldItems));
+        }
+      }
+    } else {
+      console.log(2);
+    }
   })
 
 

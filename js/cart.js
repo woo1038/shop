@@ -1,17 +1,33 @@
 window.onload = function() {
+  let cnt = 0
 
-  var oldItems = JSON.parse(localStorage.getItem('cart')) || [];
-  console.log(oldItems.map(e => e));
-  create_box(1);
+  let cart_item = JSON.parse(localStorage.getItem('cart'));
+  for(let i=0; i<cart_item.length; i++) {
+    for(let k=0; k<cart_item[i].option.length; k++) {
+      cnt += 1
+      create_box(cnt, cart_item[i].name, cart_item[i].option[k]);
+    }
+  }
 }
 
-function create_box(cnt) {
+function create_box(cnt, name, option) {
   let table = document.querySelector(".list-table tbody");
   let table_tr = document.createElement("tr");
   
   table_tr.setAttribute("id", "cart-" + cnt);
   table_tr.className = "list-item"
   table.appendChild(table_tr);
+
+  /* get cookie item */
+  let get_item = get_cookie(name).split('/');
+  let get_name = get_item[0];
+  let get_price = get_item[1];
+
+  /* option */
+  let option_size = option.split(',')[0];
+  let option_color = option.split(',')[1];
+  let option_count = option.split(',')[2];
+
 
   let num = 1;
   let flag = true;
@@ -50,11 +66,12 @@ function create_box(cnt) {
         table_td.className = "cart-info";
         table_tr.appendChild(table_td);
         table_td.appendChild(div);
+        a.innerHTML = get_name;
         a.setAttribute("href", "#none");
         div.appendChild(a);
         div.appendChild(p);
         p.innerHTML = "[옵션: "
-        // ###################################
+        span.innerHTML = option_size.concat(",", option_color) + "]";
         p.appendChild(span);
         num += 1;
         break;
@@ -63,8 +80,7 @@ function create_box(cnt) {
         table_td.className = "cart-price";
         table_tr.appendChild(table_td);
         table_td.appendChild(div);
-        div.innerHTML = "34000"
-        // ###################################
+        div.innerHTML = get_price;
         num += 1;
         break;
 
@@ -75,6 +91,7 @@ function create_box(cnt) {
         table_td.appendChild(div);
         input.setAttribute("onkeyup", "enterkey(this)");
         input.setAttribute("onblur", "price(" + cnt + ")");
+        input.value = option_count;
         div.appendChild(input);
         for(let i=0; i<2; i++) {
           let btn = document.createElement("button");
@@ -152,5 +169,21 @@ function create_box(cnt) {
         break;
     }
   }
-  console.log(table);
+}
+
+
+
+
+function get_cookie(cookie_name) {
+  var x, y;
+  var val = document.cookie.split(';');
+  
+  for (var i = 0; i < val.length; i++) {
+    x = val[i].substr(0, val[i].indexOf('='));
+    y = val[i].substr(val[i].indexOf('=') + 1);
+    x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+    if (x == cookie_name) {
+      return unescape(y); // unescape로 디코딩 후 값 리턴
+    }
+  }
 }
