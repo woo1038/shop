@@ -91,7 +91,7 @@ window.onload = function() {
 
 
 
-
+/* ######################### cart ######################### */
   let add_cart = document.querySelector(".add-cart");
   add_cart.addEventListener("click", function() {
     let get_name = get_cookie("now");
@@ -105,12 +105,18 @@ window.onload = function() {
     });
 
     if (get_arr.length >= 1) {
-      console.log(1);
-      if (cart_item == null) {
-        localStorage.setItem('cart', 0)
+      if (cart_item == null) {  //처음 카트에 물건을 담을때
+        console.log(1);
+        arr = {
+          "name": get_name, 
+          "option" : get_arr.sort()
+        }
+        oldItems.push(arr);
+        localStorage.setItem('cart', JSON.stringify(oldItems));
       } else {
         for(var i=0; i<cart_item.length; i++) {
-          if(cart_item[i].name == get_cookie("now")) {
+          if(cart_item[i].name == get_cookie("now")) {   // 카트에 물품을 담고 또 다른 물품을 담을때 중복 제거
+            console.log(2);
             let old_item = cart_item[i].option;
             let new_item = get_arr;
             let arr_item = old_item.concat(new_item);
@@ -128,7 +134,8 @@ window.onload = function() {
             break;
           } 
         }
-        if(differ) {
+        if(differ) {    // 새로운 창으로 가서 다른 아이템을 카트에 담을때
+          console.log(3);
           arr = {
             "name": get_name, 
             "option" : get_arr.sort()
@@ -141,18 +148,6 @@ window.onload = function() {
       console.log(2);
     }
   })
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 /* ######################### create layout ######################### */

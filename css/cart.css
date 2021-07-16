@@ -144,6 +144,7 @@ p {
   padding: 3px 0;
   border: 1px solid var(--bdtable);
   border-radius: 3px;
+  cursor: pointer;
 }
 .list-table .item-btn li:first-child {
   background-color: var(--primary);
@@ -200,6 +201,7 @@ p {
   border: 1px solid rgb(88, 88, 88);
   border-radius: 3px;
   font-size: 20px;
+  cursor: pointer;
 }
 .cart-btn li:nth-child(1) {
   background-color: rgb(71, 71, 71);

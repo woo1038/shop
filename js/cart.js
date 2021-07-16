@@ -8,6 +8,8 @@ window.onload = function() {
       create_box(cnt, cart_item[i].name, cart_item[i].option[k]);
     }
   }
+
+  total_price_all();
 }
 
 function create_box(cnt, name, option) {
@@ -63,6 +65,7 @@ function create_box(cnt, name, option) {
         break;
 
       case 3:
+        console.log(name);
         table_td.className = "cart-info";
         table_tr.appendChild(table_td);
         table_td.appendChild(div);
@@ -120,8 +123,7 @@ function create_box(cnt, name, option) {
       case 6:
         table_tr.appendChild(table_td);
         table_td.appendChild(div);
-        div.innerHTML = "30원"
-        // ###################################
+        div.innerHTML = (option_count * get_price) * 0.001 + "원";
         num += 1;
         break;
 
@@ -136,15 +138,20 @@ function create_box(cnt, name, option) {
       case 8:
         table_tr.appendChild(table_td);
         table_td.appendChild(div);
-        div.innerHTML = "무료"
+        if(option_count * get_price > 30000) {
+          div.innerHTML = "무료"
+        } else {
+          div.innerHTML = "2500"
+        }
         // ###################################
         num += 1;
         break;
 
       case 9:
         table_tr.appendChild(table_td);
+        div.classList.add("cart-item");
         table_td.appendChild(div);
-        div.innerHTML = "34000"
+        div.innerHTML = option_count * get_price;
         // ###################################
         num += 1;
         break;
@@ -159,6 +166,7 @@ function create_box(cnt, name, option) {
           } else if(i == 1) {
             li.innerHTML = "관심상품등록"
           } else if(i == 2) {
+            li.setAttribute("onclick", "remove(" + cnt + ")");
             li.innerHTML = "삭제"
           }
           ul.appendChild(li);
@@ -172,7 +180,70 @@ function create_box(cnt, name, option) {
 }
 
 
+/* ######################### click function ######################### */
+function upclick(cnt) {
+  let item = document.getElementById("cart-" + cnt);
+  let input = item.children[4].children[0].children[0];
+  let label_price = item.children[8].children[0];
+  let product_price = item.children[3].children[0];
 
+  input.value++;
+  label_price.innerHTML = input.value * product_price.innerHTML;
+  total_price_all();
+}
+
+function downclick(cnt) {
+  let item = document.getElementById("cart-" + cnt);
+  let input = item.children[4].children[0].children[0];
+  let label_price = item.children[8].children[0];
+  let product_price = item.children[3].children[0];
+
+  if (input.value > 1) {
+    input.value--;
+    label_price.innerHTML = input.value * product_price.innerHTML;
+    total_price_all();
+  }
+}
+
+function remove(cnt) {
+  let item = document.getElementById("cart-" + cnt);
+  item.remove();
+
+  total_price_all();
+}
+
+
+
+/* ######################### checking ######################### */
+function total_price_all() {
+  let item = document.querySelectorAll('.cart-item');
+  let total_price = document.querySelector('.total-price');
+  let total_delivery = document.querySelector('.total-delivery');
+  let total_hap = document.querySelector('.total-hap');
+  let total = 0;
+
+  
+  for(let i=0; i<item.length; i++) {
+    total += parseInt(item[i].innerHTML);
+  }
+
+  total_price.innerHTML = total;
+
+  if(total > 30000) {
+    total_delivery.innerHTML = 0
+  } else {
+    total_delivery.innerHTML = 2500
+  }
+  
+  total_hap.innerHTML = parseInt(total) + parseInt(total_delivery.innerHTML);
+
+}
+
+
+/* ######################### cookie ######################### */
+function now_cookie(name, value) {
+  document.cookie = name + "=" + value;
+}
 
 function get_cookie(cookie_name) {
   var x, y;
@@ -187,3 +258,7 @@ function get_cookie(cookie_name) {
     }
   }
 }
+
+
+
+
