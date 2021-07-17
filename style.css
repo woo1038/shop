@@ -29,7 +29,6 @@ body {
 header,
 article {
   margin-left: 315px;
-  border: 1px solid  blue;
   padding: 0;
 }
 
@@ -39,7 +38,6 @@ aside {
   left: 0;
   width: 315px;
   height: 100vh;
-  border: 1px solid  red;
 }
 
 ul {
@@ -265,11 +263,79 @@ aside {
 .best-item li {
   border: 1px solid green;
   aspect-ratio: 1;
+  cursor: pointer;
 }
 .best-item li:first-child {
   grid-row: 2 span;
   grid-column: 2 span;
 }
+.best-item li > div {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+.best-item li > div .hover-barrier {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.753);
+  font-weight: bold;
+  opacity: 0;
+  transition: .3s;
+}
+.best-item li > div .hover-barrier:hover {
+  opacity: 1;
+}
+.best-item li > div img {
+  width: 100%;
+  height: 100%;
+}
+
+/* li color design */
+.best-item .hover-barrier > span:nth-child(1) {
+  font-size: 18px;
+}
+.best-item .hover-barrier >  span:nth-child(2) {
+  color: rgb(165, 31, 31);
+}
+.best-item .hover-barrier >  span:nth-child(3) {
+  color: rgb(17, 17, 122);
+}
+.best-item .hover-barrier >  span:nth-child(4) {
+  color: #464646;
+}
+
+.best-item .hover-barrier .color-box {}
+.best-item .hover-barrier .color-box span:nth-child(n) {
+  display: inline-block;
+  width: 25px;
+  height: 5px;
+  margin: 0 2px;
+  border: 1px solid #e5e5e5;
+}
+.best-item .hover-barrier .color-box .white {
+  background-color: #fff;
+}
+.best-item .hover-barrier .color-box .black {
+  background-color: #000;
+}
+.best-item .hover-barrier .color-box .green {
+  background-color:green;
+}
+.best-item .hover-barrier .color-box .red {
+  background-color: rgb(170, 39, 39);
+}
+.best-item .hover-barrier .color-box .blue {
+  background-color: blue;
+}
+/* li color design */
+
 .banner-items {
   text-align: center;
   margin: 0 50px;

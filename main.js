@@ -13,6 +13,41 @@ window.onload = function() {
 
     })
   }
+
+  
+  
+  const hover_barrier = document.querySelectorAll(".hover-barrier");
+  for(const hover of hover_barrier) {
+    let name = hover.parentNode.parentNode.getAttribute("name");
+    let price = hover.parentNode.parentNode.getAttribute("price");
+    let summary = hover.parentNode.parentNode.getAttribute("summary");
+    let info = hover.parentNode.parentNode.getAttribute("info");
+    let color = hover.parentNode.parentNode.getAttribute("color");
+    let arr = [name, price, summary, info, color];
+    
+    let cnt = 0
+    let color_box = document.createElement("div");
+
+    arr.forEach((text) => {
+      cnt += 1
+
+      let span = document.createElement("span");
+
+      if(cnt == 5) {
+        let color_block = text.split(' ');
+        color_block.map((e) => {
+          let block = document.createElement("span");
+          block.className = e
+          color_box.className = "color-box";
+          color_box.appendChild(block)
+          hover.appendChild(color_box)
+        });
+      } else {
+        span.innerHTML = text
+        hover.appendChild(span)
+      }
+    })
+  }
 }
 
 
