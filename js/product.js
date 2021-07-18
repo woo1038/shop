@@ -34,7 +34,6 @@ window.onload = function() {
 
   product_size.addEventListener("click",function(e){
     if(e.target.className != "product-size") {
-      console.log();
       active_click(e, this, "size");
       set_cookie("option-1", e.target.innerHTML);
   
@@ -97,7 +96,7 @@ window.onload = function() {
     let get_name = get_cookie("now");
     let get_arr = [];
     let cart_item = JSON.parse(localStorage.getItem('cart'));
-    var oldItems = cart_item || [];
+    var old_item = cart_item || [];
     let differ = true;
 
     Array.from(product_items.children).map((e) => {
@@ -106,47 +105,41 @@ window.onload = function() {
 
     if (get_arr.length >= 1) {
       if (cart_item == null) {  //처음 카트에 물건을 담을때
-        console.log(1);
         arr = {
           "name": get_name, 
           "option" : get_arr.sort()
         }
-        oldItems.push(arr);
-        localStorage.setItem('cart', JSON.stringify(oldItems));
+        old_item.push(arr);
+        localStorage.setItem('cart', JSON.stringify(old_item));
       } else {
         for(var i=0; i<cart_item.length; i++) {
           if(cart_item[i].name == get_cookie("now")) {   // 카트에 물품을 담고 또 다른 물품을 담을때 중복 제거
-            console.log(2);
             let old_item = cart_item[i].option;
             let new_item = get_arr;
             let arr_item = old_item.concat(new_item);
             let uni_item = arr_item.filter((item, pos) => arr_item.indexOf(item) === pos);
             
             cart_item[i].option = uni_item;
-            console.log(uni_item);
 
             arr = {
               "name": get_name, 
               "option" : uni_item.sort()
             }
-            localStorage.setItem('cart', JSON.stringify(oldItems));
+            localStorage.setItem('cart', JSON.stringify(old_item));
             differ = false;
             break;
           } 
         }
         if(differ) {    // 새로운 창으로 가서 다른 아이템을 카트에 담을때
-          console.log(3);
           arr = {
             "name": get_name, 
             "option" : get_arr.sort()
           }
-          oldItems.push(arr);
-          localStorage.setItem('cart', JSON.stringify(oldItems));
+          old_item.push(arr);
+          localStorage.setItem('cart', JSON.stringify(old_item));
         }
       }
-    } else {
-      console.log(2);
-    }
+    } 
   })
 }
 
@@ -285,7 +278,6 @@ function upclick(cnt) {
   label_price.innerHTML = input.value * product_price;
   total_price_all();
   total_count_all();
-  console.log(item);
 }
 
 function downclick(cnt) {

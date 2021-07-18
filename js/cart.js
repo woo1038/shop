@@ -12,12 +12,14 @@ window.onload = function() {
   total_price_all();
 }
 
+/* ######################### create layout ######################### */
 function create_box(cnt, name, option) {
   let table = document.querySelector(".list-table tbody");
   let table_tr = document.createElement("tr");
   
   table_tr.setAttribute("id", "cart-" + cnt);
   table_tr.className = "list-item"
+  table_tr.classList.add(name);
   table.appendChild(table_tr);
 
   /* get cookie item */
@@ -65,7 +67,6 @@ function create_box(cnt, name, option) {
         break;
 
       case 3:
-        console.log(name);
         table_td.className = "cart-info";
         table_tr.appendChild(table_td);
         table_td.appendChild(div);
@@ -123,7 +124,7 @@ function create_box(cnt, name, option) {
       case 6:
         table_tr.appendChild(table_td);
         table_td.appendChild(div);
-        div.innerHTML = (option_count * get_price) * 0.001 + "원";
+        div.innerHTML = parseInt((option_count * get_price) * 0.001) + "원";
         num += 1;
         break;
 
@@ -131,7 +132,6 @@ function create_box(cnt, name, option) {
         table_tr.appendChild(table_td);
         table_td.appendChild(div);
         div.innerHTML = "기본배송"
-        // ###################################
         num += 1;
         break;
 
@@ -143,7 +143,6 @@ function create_box(cnt, name, option) {
         } else {
           div.innerHTML = "2500"
         }
-        // ###################################
         num += 1;
         break;
 
@@ -152,7 +151,6 @@ function create_box(cnt, name, option) {
         div.classList.add("cart-item");
         table_td.appendChild(div);
         div.innerHTML = option_count * get_price;
-        // ###################################
         num += 1;
         break;
 
@@ -206,6 +204,8 @@ function downclick(cnt) {
 }
 
 function remove(cnt) {
+  local_checking(cnt);
+
   let item = document.getElementById("cart-" + cnt);
   item.remove();
 
@@ -236,8 +236,49 @@ function total_price_all() {
   }
   
   total_hap.innerHTML = parseInt(total) + parseInt(total_delivery.innerHTML);
+  
+  for(const i of item) {
+    let price = parseInt(i.innerHTML);
+    let accoum = i.parentNode.parentNode.children[5];
+    let delivery = i.parentNode.parentNode.children[7].childNodes[0];
+
+    accoum.innerHTML = parseInt(price * 0.001) + "원";
+
+    if(price > 30000) {
+      delivery.innerHTML = "무료"
+    } else {
+      delivery.innerHTML = "2500"
+    }
+  }
 
 }
+
+
+/* ######################### cookie ######################### */
+function local_checking(cnt) {
+  let item = document.getElementById("cart-" + cnt);
+
+  let item_class = item.classList[1];
+
+  let option = item.children[2].children[0].children[1].children[0].innerHTML.split(']')[0];
+  let count = item.children[4].children[0].children[0].value;
+  let option_concat = option.concat(",", count);
+
+  let cart_item = JSON.parse(localStorage.getItem('cart'));
+  
+  for(let i=0; i<cart_item.length; i++) {
+    if(cart_item[i].name == item_class) {
+      for(let k=0; k<cart_item[i].option.length; k++) {
+        if(cart_item[i].option[k] == option_concat) {
+          cart_item[i].option.splice(k, 1);
+        }
+      }
+    }
+  }
+  localStorage.setItem('cart', JSON.stringify(cart_item));
+}
+
+
 
 
 /* ######################### cookie ######################### */

@@ -64,7 +64,6 @@ function product(cnt) {
   let size = item.getAttribute("size").split(' ');
 
   set_cookie(cnt, name, price, summary, info, color, size);
-  console.log(get_cookie(cnt));
 }
 
 
