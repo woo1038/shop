@@ -6,6 +6,7 @@ window.onload = function() {
     for(let k=0; k<cart_item[i].option.length; k++) {
       cnt += 1
       create_box(cnt, cart_item[i].name, cart_item[i].option[k]);
+      console.log(1);
     }
   }
 

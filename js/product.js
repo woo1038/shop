@@ -98,6 +98,7 @@ window.onload = function() {
     let cart_item = JSON.parse(localStorage.getItem('cart'));
     var old_item = cart_item || [];
     let differ = true;
+    console.log(old_item);
 
     Array.from(product_items.children).map((e) => {
       get_arr.push(e.children[0].children[1].innerHTML.split(' ')[1].concat(",",e.children[1].children[0].value))
@@ -113,6 +114,7 @@ window.onload = function() {
         localStorage.setItem('cart', JSON.stringify(old_item));
       } else {
         for(var i=0; i<cart_item.length; i++) {
+          console.log(cart_item);
           if(cart_item[i].name == get_cookie("now")) {   // 카트에 물품을 담고 또 다른 물품을 담을때 중복 제거
             let old_item = cart_item[i].option;
             let new_item = get_arr;
