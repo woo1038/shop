@@ -15,13 +15,13 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 315px;
 }
 .login {
   width: 360px;
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
 }
 
 .login-type h1 {
@@ -29,6 +29,30 @@ section {
   font-size: 38px;
   text-align: center;
   font-weight: normal;
+  margin-bottom: 30px;
+}
+.login-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px 0;
+}
+.login-form input,
+.login-form button {
+  padding: 15px;
+  font-size: 18px;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  opacity: .8;
+}
+.login-form button {
+  background-color: #719ae6;
+}
+.login-form input:focus {
+  outline: none;
+  box-shadow: 0 0 10px 1px #719ae6;
+}
+.login-form button:hover {
+  opacity: 1;
 }
 .btn {
   border: 1px solid lightgray;
@@ -49,19 +73,16 @@ section {
   background: #fff;
 }
 .btn:nth-of-type(2) {
-  background: rgb(223, 123, 123);
+  background: #898c9b;
 }
 .btn:nth-of-type(3) {
-  background: #898c9b;
+  background: rgb(223, 123, 123);
 }
 .btn:nth-of-type(4) {
   background: #11ce00;
 }
 .btn:nth-of-type(5) {
   background: #0076fe;
-}
-.btn:nth-of-type(6) {
-  background: #00C026;
 }
 
 .or-text {

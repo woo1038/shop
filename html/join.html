@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <link rel="stylesheet" href="/style.css".css">
-  <link rel="stylesheet" href="/css/login.css".css">
+  <link rel="stylesheet" href="/css/join.css".css">
 </head>
 <body>
 
@@ -137,22 +137,18 @@
   </aside>
 
   <section>
-    <div class="login">
-      <div class="login-type">
-        <h1>로그인</h1>
-        <form class="login-form" action="">
-          <input type="text" placeholder="아이디">
-          <input type="text" placeholder="비밀번호">
-          <button>로그인</button>
+    <div class="join">
+      <div class="join-type">
+        <h1>회원가입</h1>
+        <form action="">
+            <input type="text" name="input_id" placeholder="아이디">
+            <input type="text" name="input_password" placeholder="비밀번호">
+            <input type="text" name="input_name" placeholder="이름">
         </form>
-        <span class="or-text">또는</span>
-        <a class="btn" href="/html/join.html">회원가입</a>
-        <a class="btn" href="#none">이메일로 로그인</a>
-        <a class="btn" href="#none">네이버로 로그인</a>
-        <a class="btn" href="#none">페이스북으로 로그인</a>
-      </div>
-      <div class="login-footer">
-        <input type="checkbox" id="chk"> <label for="chk">로그인 상태 유지</label>
+        <div class="join-btn">
+          <button>취소</button>
+          <button>가입하기</button>
+        </div>
       </div>
     </div>
   </section>

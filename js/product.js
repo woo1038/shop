@@ -97,8 +97,7 @@ window.onload = function() {
     let get_arr = [];
     let cart_item = JSON.parse(localStorage.getItem('cart'));
     var old_item = cart_item || [];
-    let differ = true;
-    console.log(old_item);
+    let differ = false;
 
     Array.from(product_items.children).map((e) => {
       get_arr.push(e.children[0].children[1].innerHTML.split(' ')[1].concat(",",e.children[1].children[0].value))
@@ -114,8 +113,8 @@ window.onload = function() {
         localStorage.setItem('cart', JSON.stringify(old_item));
       } else {
         for(var i=0; i<cart_item.length; i++) {
-          console.log(cart_item);
           if(cart_item[i].name == get_cookie("now")) {   // 카트에 물품을 담고 또 다른 물품을 담을때 중복 제거
+            console.log(1);
             let old_item = cart_item[i].option;
             let new_item = get_arr;
             let arr_item = old_item.concat(new_item);
@@ -123,22 +122,22 @@ window.onload = function() {
             
             cart_item[i].option = uni_item;
 
-            arr = {
-              "name": get_name, 
-              "option" : uni_item.sort()
-            }
-            localStorage.setItem('cart', JSON.stringify(old_item));
-            differ = false;
+            localStorage.setItem('cart', JSON.stringify(cart_item));
             break;
-          } 
+          }
+          if(cart_item[i].name !== get_cookie("now") && i == cart_item.length - 1) {
+            differ = true;
+          }
         }
+
         if(differ) {    // 새로운 창으로 가서 다른 아이템을 카트에 담을때
           arr = {
-            "name": get_name, 
-            "option" : get_arr.sort()
-          }
+                "name": get_name, 
+                "option" : get_arr.sort()
+              }
           old_item.push(arr);
           localStorage.setItem('cart', JSON.stringify(old_item));
+          differ = false;
         }
       }
     } 
