@@ -186,6 +186,28 @@ function upclick(cnt) {
   let label_price = item.children[8].children[0];
   let product_price = item.children[3].children[0];
 
+
+
+  /* local */
+  let cart_item = JSON.parse(localStorage.getItem('cart'));
+  let cart_class = item.classList[1];
+  let cart_option = item.children[2].children[0].children[1].children[0].innerHTML.split("]")[0];
+  let cart_count = input.value;
+  let cart_compare = cart_option.concat(",", cart_count);
+
+  for(let i=0; i<cart_item.length; i++) {
+    if(cart_item[i].name == cart_class) {
+      for(let k=0; k<cart_item[i].option.length; k++) {
+        if(cart_item[i].option[k] == cart_compare) {
+          cart_item[i].option[k] = cart_option.concat(",",parseInt(input.value) + 1);
+        }
+      }
+    }
+  }
+  localStorage.setItem('cart', JSON.stringify(cart_item));
+  
+
+
   input.value++;
   label_price.innerHTML = input.value * product_price.innerHTML;
   total_price_all();
@@ -197,7 +219,26 @@ function downclick(cnt) {
   let label_price = item.children[8].children[0];
   let product_price = item.children[3].children[0];
 
+  /* local */
+  let cart_item = JSON.parse(localStorage.getItem('cart'));
+  let cart_class = item.classList[1];
+  let cart_option = item.children[2].children[0].children[1].children[0].innerHTML.split("]")[0];
+  let cart_count = input.value;
+  let cart_compare = cart_option.concat(",", cart_count);
+  
   if (input.value > 1) {
+
+    for(let i=0; i<cart_item.length; i++) {
+      if(cart_item[i].name == cart_class) {
+        for(let k=0; k<cart_item[i].option.length; k++) {
+          if(cart_item[i].option[k] == cart_compare) {
+            cart_item[i].option[k] = cart_option.concat(",",parseInt(input.value) - 1);
+          }
+        }
+      }
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart_item));
     input.value--;
     label_price.innerHTML = input.value * product_price.innerHTML;
     total_price_all();
