@@ -6,7 +6,6 @@ window.onload = function() {
     for(let k=0; k<cart_item[i].option.length; k++) {
       cnt += 1
       create_box(cnt, cart_item[i].name, cart_item[i].option[k]);
-      console.log(1);
     }
   }
 
@@ -24,9 +23,10 @@ function create_box(cnt, name, option) {
   table.appendChild(table_tr);
 
   /* get cookie item */
-  let get_item = get_cookie(name).split('/');
+  let get_item = get_cookie(name).split('|');
   let get_name = get_item[0];
   let get_price = get_item[1];
+  let get_img = get_item[6];
 
   /* option */
   let option_size = option.split(',')[0];
@@ -62,7 +62,7 @@ function create_box(cnt, name, option) {
         table_td.className = "cart-img";
         table_tr.appendChild(table_td);
         table_td.appendChild(div);
-        img.setAttribute("src", "http://lookple.com/web/product/tiny/20200501/623f9ebb2f116d41a4902a96ee78c885.jpg");
+        img.setAttribute("src", get_img);
         div.appendChild(img);
         num += 1;
         break;
@@ -85,7 +85,7 @@ function create_box(cnt, name, option) {
         table_td.className = "cart-price";
         table_tr.appendChild(table_td);
         table_td.appendChild(div);
-        div.innerHTML = get_price;
+        div.innerHTML = parseInt(get_price).toLocaleString('ko-KR') + "원";
         num += 1;
         break;
 
@@ -151,7 +151,7 @@ function create_box(cnt, name, option) {
         table_tr.appendChild(table_td);
         div.classList.add("cart-item");
         table_td.appendChild(div);
-        div.innerHTML = option_count * get_price;
+        div.innerHTML = parseInt(option_count * get_price).toLocaleString('ko-KR') + "원";
         num += 1;
         break;
 
@@ -186,8 +186,6 @@ function upclick(cnt) {
   let label_price = item.children[8].children[0];
   let product_price = item.children[3].children[0];
 
-
-
   /* local */
   let cart_item = JSON.parse(localStorage.getItem('cart'));
   let cart_class = item.classList[1];
@@ -209,7 +207,7 @@ function upclick(cnt) {
 
 
   input.value++;
-  label_price.innerHTML = input.value * product_price.innerHTML;
+  label_price.innerHTML = parseInt(input.value * (product_price.innerHTML.replace(/원/g, "", ).replace(/,/g, ""))).toLocaleString('ko-KR') + "원";
   total_price_all();
 }
 
@@ -240,7 +238,7 @@ function downclick(cnt) {
 
     localStorage.setItem('cart', JSON.stringify(cart_item));
     input.value--;
-    label_price.innerHTML = input.value * product_price.innerHTML;
+    label_price.innerHTML = parseInt(input.value * (product_price.innerHTML.replace(/원/g, "", ).replace(/,/g, ""))).toLocaleString('ko-KR') + "원";
     total_price_all();
   }
 }
@@ -266,35 +264,53 @@ function total_price_all() {
 
   
   for(let i=0; i<item.length; i++) {
-    total += parseInt(item[i].innerHTML);
+    total += parseInt(item[i].innerHTML.replace(/,/g, ""));
   }
-
-  total_price.innerHTML = total;
-
+  total_price.innerHTML = parseInt(total).toLocaleString('ko-KR');
+  
   if(total > 30000) {
     total_delivery.innerHTML = 0
   } else {
-    total_delivery.innerHTML = 2500
+    total_delivery.innerHTML = parseInt(2500).toLocaleString('ko-KR');
   }
   
-  total_hap.innerHTML = parseInt(total) + parseInt(total_delivery.innerHTML);
+  total_hap.innerHTML = parseInt(parseInt(total) + parseInt(total_delivery.innerHTML.replace(/,/g, ""))).toLocaleString('ko-KR');
   
   for(const i of item) {
-    let price = parseInt(i.innerHTML);
+    let price = parseInt(i.innerHTML.replace(/,/g, ""));
     let accoum = i.parentNode.parentNode.children[5];
     let delivery = i.parentNode.parentNode.children[7].childNodes[0];
-
-    accoum.innerHTML = parseInt(price * 0.001) + "원";
+    
+    accoum.innerHTML = parseInt(price * 0.001).toLocaleString('ko-KR') + "원";
 
     if(price > 30000) {
       delivery.innerHTML = "무료"
     } else {
-      delivery.innerHTML = "2500"
+      delivery.innerHTML = "2,500원"
     }
   }
 
 }
 
+/* ######################### onblur ######################### */
+function price(cnt) {
+  let item = document.getElementById("cart-" + cnt);
+  let input = item.children[4].children[0].children[0].value;
+  let label_price = item.children[5];
+  let product_price = item.children[3].children[0];
+  let total_price = item.children[8].children[0]
+
+  label_price.innerHTML = parseInt(input * (product_price.innerHTML.replace(/원/g, "", ).replace(/,/g, "")) * 0.001).toLocaleString('ko-KR') + "원";
+  total_price.innerHTML = parseInt(input * (product_price.innerHTML.replace(/원/g, "", ).replace(/,/g, ""))).toLocaleString('ko-KR') + "원";
+  total_price_all();
+}
+
+/* ######################### key press ######################### */
+function enterkey(e) {
+  if (window.event.keyCode == 13) {
+    e.blur();
+  }
+}
 
 /* ######################### cookie ######################### */
 function local_checking(cnt) {
@@ -323,7 +339,7 @@ function local_checking(cnt) {
 
 
 
-/* ######################### cookie ######################### */
+/* ######################### set cookie ######################### */
 function now_cookie(name, value) {
   document.cookie = name + "=" + value;
 }

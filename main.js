@@ -10,7 +10,6 @@ window.onload = function() {
       // console.log([...tab_item.parentElement.children].map(e=>e.classList.remove("active")));
       Array.from(tab_item.parentElement.children).map(e=>e.classList.remove("active"));
       tab_item.classList.add("active");
-
     })
   }
 
@@ -23,7 +22,7 @@ window.onload = function() {
     let summary = hover.parentNode.parentNode.getAttribute("summary");
     let info = hover.parentNode.parentNode.getAttribute("info");
     let color = hover.parentNode.parentNode.getAttribute("color");
-    let arr = [name, price, summary, info, color];
+    let arr = [name, parseInt(price).toLocaleString('ko-KR'), summary, info, color];
     
     let cnt = 0
     let color_box = document.createElement("div");
@@ -115,7 +114,7 @@ window.onload = function() {
                   break;
                   
                 case 1:
-                    label.innerHTML = item_price;
+                    label.innerHTML = parseInt(item_price).toLocaleString('ko-KR');
                   break;
                   
                 case 2:
@@ -160,16 +159,17 @@ function product(cnt) {
   let info = item.getAttribute("info");
   let color = item.getAttribute("color").split(' ');
   let size = item.getAttribute("size").split(' ');
+  let img = item.children[0].children[1].src;
 
-  set_cookie(cnt, name, price, summary, info, color, size);
+  set_cookie(cnt, name, price, summary, info, color, size, img);
 }
 
 
 function now_cookie(name, value) {
   document.cookie = name + "=" + value;
 }
-function set_cookie(cnt, name, price, summary, info, color, size) {
-  document.cookie = cnt + "=" +name + '/' + price + '/' + summary + '/' + info + '/' + color + '/' + size;
+function set_cookie(cnt, name, price, summary, info, color, size, img) {
+  document.cookie = cnt + "=" +name + '|' + price + '|' + summary + '|' + info + '|' + color + '|' + size+ '|' + img;
 }
 
 function get_cookie(cookie_name) {

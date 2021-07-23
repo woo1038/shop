@@ -6,15 +6,17 @@ window.onload = function() {
   
 
   let now_item = get_cookie('now');
-  let item = get_cookie(now_item).split('/');
+  let item = get_cookie(now_item).split('|');
   let name = item[0];
   let price = item[1];
   let summary = item[2];
   let info = item[3];
   let color = item[4].split(',');
   let size = item[5].split(',');
+  let img = item[6];
   
 
+  let product_img = document.querySelector('.product-img').children[0];
   let product_name = document.querySelector('.product-name');
   let product_price = document.querySelector('.product-price');
   let product_summary = document.querySelector('.product-summary');
@@ -23,8 +25,9 @@ window.onload = function() {
   let product_color = document.querySelector('.product-color');
   let product_items = document.querySelector('.product-items');
 
+  product_img.src = img;
   product_name.innerHTML = name;
-  product_price.innerHTML = price;
+  product_price.innerHTML = parseInt(price).toLocaleString('ko-KR');
   product_summary.innerHTML = summary;
   product_info.innerHTML = info;
 
@@ -78,9 +81,7 @@ window.onload = function() {
         total_count_all();
       }
     }
-    /* total */
-    // let total_price = document.querySelector('.total-price');
-    // total_price.innerHTML = parseInt(total_price.innerHTML).toLocaleString('ko-KR');
+
   })
 
 
@@ -114,7 +115,6 @@ window.onload = function() {
       } else {
         for(var i=0; i<cart_item.length; i++) {
           if(cart_item[i].name == get_cookie("now")) {   // 카트에 물품을 담고 또 다른 물품을 담을때 중복 제거
-            console.log(1);
             let old_item = cart_item[i].option;
             let new_item = get_arr;
             let arr_item = old_item.concat(new_item);
@@ -139,6 +139,12 @@ window.onload = function() {
           localStorage.setItem('cart', JSON.stringify(old_item));
           differ = false;
         }
+      }
+      var result = confirm("선택하신 상품이 카트에 담겼습니다.\n카트로 이동하시겠습니까?");
+        
+      if(result)
+      {
+        location.href= '/html/cart.html';
       }
     } 
   })
@@ -231,7 +237,7 @@ function create_box(cnt, name, key) {
             }
           }
 
-          label.innerHTML = product_price;
+          label.innerHTML = parseInt(product_price).toLocaleString('ko-KR');
           li.appendChild(label);
       break;
   }
@@ -273,10 +279,10 @@ function upclick(cnt) {
   let item = document.getElementById("item-" + cnt);
   let input = item.children[1].children[0];
   let label_price = item.children[3];
-  let product_price = get_cookie(get_cookie('now').split('/')[0]).split('/')[1];
+  let product_price = get_cookie(get_cookie('now').split('|')[0]).split('|')[1];
 
   input.value++;
-  label_price.innerHTML = input.value * product_price;
+  label_price.innerHTML = parseInt(input.value * product_price).toLocaleString('ko-KR');
   total_price_all();
   total_count_all();
 }
@@ -285,11 +291,11 @@ function downclick(cnt) {
   let item = document.getElementById("item-" + cnt);
   let input = item.children[1].children[0];
   let label_price = item.children[3];
-  let product_price = get_cookie(get_cookie('now').split('/')[0]).split('/')[1];
+  let product_price = get_cookie(get_cookie('now').split('|')[0]).split('|')[1];
 
   if (input.value > 1) {
     input.value--;
-    label_price.innerHTML = input.value * product_price;
+    label_price.innerHTML = parseInt(input.value * product_price).toLocaleString('ko-KR');
     total_price_all();
     total_count_all();
   }
@@ -310,9 +316,9 @@ function price(cnt) {
   let item = document.getElementById("item-" + cnt);
   let input = item.children[1].children[0];
   let label_price = item.children[3];
-  let product_price = get_cookie(get_cookie('now').split('/')[0]).split('/')[1];
+  let product_price = get_cookie(get_cookie('now').split('|')[0]).split('|')[1];
 
-  label_price.innerHTML = input.value * product_price;
+  label_price.innerHTML = parseInt(input.value * product_price).toLocaleString('ko-KR');
   total_price_all();
   total_count_all();
 }
@@ -322,6 +328,7 @@ function price(cnt) {
 function enterkey(e) {
   if (window.event.keyCode == 13) {
     e.blur();
+    console.log(1);
   }
 }
 
@@ -330,13 +337,12 @@ function total_price_all() {
   let item = document.querySelectorAll('.product-item');
   let total_price = document.querySelector('.total-price');
   let total = 0;
-
   
   for(let i=0; i<item.length; i++) {
-    total += parseInt(item[i].children[3].innerHTML);
+    total += parseInt(item[i].children[3].innerHTML.replace(/,/g, ""));
   }
 
-  total_price.innerHTML = total;  
+  total_price.innerHTML = parseInt(total).toLocaleString('ko-KR');  
 }
 
 function total_count_all() {
