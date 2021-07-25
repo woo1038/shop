@@ -1,0 +1,10 @@
+.sub-title {
+  text-align-last: left;
+}
+.banner-items {
+  margin: 0;
+  padding: 20px;
+}
+.banner-item {
+  grid-template-columns: repeat(4, 1fr);
+}

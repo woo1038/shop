@@ -300,6 +300,27 @@ function price(cnt) {
   let product_price = item.children[3].children[0];
   let total_price = item.children[8].children[0]
 
+  /* local */
+  let cart_item = JSON.parse(localStorage.getItem('cart'));
+  let cart_class = item.classList[1];
+  let cart_option = item.children[2].children[0].children[1].children[0].innerHTML.split("]")[0];
+  let cart_count = input;
+  let cart_compare = cart_option.concat(",", cart_count);
+
+  for(let i=0; i<cart_item.length; i++) {
+    if(cart_item[i].name == cart_class) {
+      for(let k=0; k<cart_item[i].option.length; k++) {
+        let this_option = cart_item[i].option[k].split(',')[0].concat(",", cart_item[i].option[k].split(',')[1])
+        console.log(this_option, cart_compare);
+        if(this_option == cart_option) {
+          cart_item[i].option[k] = cart_option.concat(",",parseInt(input));
+        }
+      }
+    }
+  }
+  localStorage.setItem('cart', JSON.stringify(cart_item));
+    
+
   label_price.innerHTML = parseInt(input * (product_price.innerHTML.replace(/원/g, "", ).replace(/,/g, "")) * 0.001).toLocaleString('ko-KR') + "원";
   total_price.innerHTML = parseInt(input * (product_price.innerHTML.replace(/원/g, "", ).replace(/,/g, ""))).toLocaleString('ko-KR') + "원";
   total_price_all();

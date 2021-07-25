@@ -344,7 +344,6 @@ aside {
   display: grid;
   margin: 0 auto;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   gap: 20px 15px;
   padding: 10px;
 }
