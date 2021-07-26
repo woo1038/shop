@@ -139,7 +139,7 @@ function create_box(cnt, name, option) {
       case 8:
         table_tr.appendChild(table_td);
         table_td.appendChild(div);
-        if(option_count * get_price > 30000) {
+        if(option_count * get_price >= 30000) {
           div.innerHTML = "무료"
         } else {
           div.innerHTML = "2500"
@@ -268,7 +268,7 @@ function total_price_all() {
   }
   total_price.innerHTML = parseInt(total).toLocaleString('ko-KR');
   
-  if(total > 30000) {
+  if(total >= 30000) {
     total_delivery.innerHTML = 0
   } else {
     total_delivery.innerHTML = parseInt(2500).toLocaleString('ko-KR');
@@ -283,7 +283,7 @@ function total_price_all() {
     
     accoum.innerHTML = parseInt(price * 0.001).toLocaleString('ko-KR') + "원";
 
-    if(price > 30000) {
+    if(price >= 30000) {
       delivery.innerHTML = "무료"
     } else {
       delivery.innerHTML = "2,500원"
