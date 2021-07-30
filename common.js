@@ -1,57 +1,60 @@
 
 
-// let search_btn = document.querySelector(".search-btn");
-// let search_input = document.querySelector(".search-input");
-// search_btn.addEventListener("click", function() {
-//   location.href= 'html/search.html';
+let search_btn = document.querySelector(".search-btn");
+let search_input = document.querySelector(".search-input");
+search_btn.addEventListener("click", function() {
+  location.href= 'html/search.html';
+
+  let value = document.querySelector(".search-input").value;
+  search_cookie("search", value);
+})
+
+function search_cookie(name, value) {
+  document.cookie = name + "=" + value
+}
 
 
-// })
 
-
-
-
-// function search_cookie(cnt, name, price, summary, info, color, size, img) {
-//   document.cookie = cnt + "=" +name + '|' + price + '|' + summary + '|' + info + '|' + color + '|' + size+ '|' + img;
-// }
 
 var items = [];
 jsonArr(items);
 autocomplete(document.querySelector(".search-input"), items);
 
-
-
 function autocomplete(inp, arr) {
   var currentFocus;
-  inp.addEventListener("input", function(e) {
-      var list, text, val = this.value;
-      
-      if (!val) { return false;}
-      currentFocus = -1;
-      list = document.createElement("DIV");
-      list.setAttribute("id", "autocomplete-list");
-      list.setAttribute("class", "autocomplete-items");
+  inp.addEventListener("input", function (e) {
+    var list, text, val = this.value;
 
-      this.parentNode.appendChild(list);
+    closeAllLists();
+    if (!val) {
+      return false;
+    }
+    currentFocus = -1;
+    list = document.createElement("DIV");
+    list.setAttribute("id", this.id + "autocomplete-list");
+    list.setAttribute("class", "autocomplete-items");
+    /*append the DIV element as a child of the autocomplete container:*/
+    this.parentNode.appendChild(list);
 
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-          text = document.createElement("DIV");
-          text.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-          text.innerHTML += arr[i].substr(val.length);
-          text.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+        text = document.createElement("DIV");
+        text.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+        text.innerHTML += arr[i].substr(val.length);
+        text.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
 
-          text.addEventListener("click", function(e) {
-              inp.value = this.getElementsByTagName("input")[0].value;
-              closeAllLists();
-          });
-          list.appendChild(text);
-        }
+        text.addEventListener("click", function (e) {
+          inp.value = this.getElementsByTagName("input")[0].value;
+          closeAllLists();
+        });
+        list.appendChild(text);
       }
+    }
   });
   
   inp.addEventListener("keydown", function(e) {
       var x = document.getElementById(this.id + "autocomplete-list");
+      console.log(document.getElementById(this.id + "autocomplete-list"));
       if (x) x = x.getElementsByTagName("div");
       if (e.keyCode == 40) {
         currentFocus++;
