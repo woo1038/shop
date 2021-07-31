@@ -1,10 +1,79 @@
 .sub-title {
-  text-align-last: left;
+  margin: 20px;
 }
-.banner-items {
-  margin: 0;
-  padding: 20px;
+
+/* common color */
+.color-box span:nth-child(n) {
+  display: inline-block;
+  width: 25px;
+  height: 5px;
+  margin: 0 2px;
+  border: 1px solid #e5e5e5;
 }
-.banner-item {
+.color-box .white {
+  background-color: #fff;
+}
+.color-box .black {
+  background-color: #000;
+}
+.color-box .green {
+  background-color:green;
+}
+.color-box .red {
+  background-color: rgb(170, 39, 39);
+}
+.color-box .blue {
+  background-color: blue;
+}
+/* common color */
+
+.search-section {
+  text-align: center;
+  margin: 30px 50px;
+}
+.search-items {
+  display: grid;
+  margin: 0 auto;
   grid-template-columns: repeat(4, 1fr);
+  gap: 20px 15px;
+  padding: 10px;
+}
+.search-items li {
+  display: flex;
+  border: 1px solid transparent;
+  flex-direction: column;
+  transition: .5s;
+  cursor: pointer;
+}
+.search-items li:hover {
+  border: 1px solid var(--active);
+  box-shadow: 0 0 20px 3px var(--hover);
+}
+.search-items .banner-img {
+  width: 100%;
+  height: 80%;
+}
+.search-items .banner-img img {
+  height: 100%;
+  width: 100%;
+}
+.search-items .banner-info {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+}
+.search-items .banner-info label {
+  cursor: pointer;
+}
+.search-items .banner-info label:nth-child(1) {
+  font-weight: bold;
+}
+.search-items .banner-info label:nth-child(2) {
+  color: rgb(165, 31, 31);
+}
+.search-items .banner-info label:nth-child(3) {
+  color: grey;
+}
+.search-items .banner-info label:nth-child(4) {
+  color: blue;
 }

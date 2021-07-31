@@ -54,7 +54,6 @@ function autocomplete(inp, arr) {
   
   inp.addEventListener("keydown", function(e) {
       var x = document.getElementById(this.id + "autocomplete-list");
-      console.log(document.getElementById(this.id + "autocomplete-list"));
       if (x) x = x.getElementsByTagName("div");
       if (e.keyCode == 40) {
         currentFocus++;
@@ -67,7 +66,7 @@ function autocomplete(inp, arr) {
         if (currentFocus > -1) {
           if (x) x[currentFocus].click();
         }
-      }
+      } 
   });
   
   function addActive(x) {

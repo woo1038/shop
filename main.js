@@ -34,7 +34,7 @@ function create_layout(data) {
           size="${arr[cnt].items[k].size.join(" ")}"
           >
             <div>
-              <div class="hover-barrier"></div>
+              <div class="hover-barrier">여기에 정보입력</div>
               <img src="${arr[cnt].items[k].img}" alt="이미지" />
             </div>
           </li>`
