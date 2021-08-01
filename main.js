@@ -11,7 +11,6 @@ xmlhttp.send();
 
 function create_layout(data) {
   var arr = JSON.parse(data);
-  var layout_li = "";
   let cnt = 0
   let section = document.getElementById('items');
 
@@ -22,26 +21,34 @@ function create_layout(data) {
     section.appendChild(create_ul)
     
     for (let k=0; k<arr[cnt].items.length; k++) {
-      layout_li+=
-        `<li 
-          class="${arr[cnt].items[k].class}"
-          onclick="product('${arr[cnt].items[k].class}')"
-          name="${arr[cnt].items[k].name}"
-          price="${arr[cnt].items[k].price}"
-          summary="${arr[cnt].items[k].summary}"
-          info="${arr[cnt].items[k].info}"
-          color="${arr[cnt].items[k].color.join(" ")}"
-          size="${arr[cnt].items[k].size.join(" ")}"
-          >
-            <div>
-              <div class="hover-barrier">여기에 정보입력</div>
-              <img src="${arr[cnt].items[k].img}" alt="이미지" />
+      let create_li = document.createElement("li");
+      create_li.setAttribute("class", arr[cnt].items[k].class)
+      create_li.setAttribute("onclick", "product('" + arr[cnt].items[k].class + "')")
+      create_li.setAttribute("name", arr[cnt].items[k].name)
+      create_li.setAttribute("price", arr[cnt].items[k].price)
+      create_li.setAttribute("summary", arr[cnt].items[k].summary)
+      create_li.setAttribute("info", arr[cnt].items[k].info)
+      create_li.setAttribute("color", arr[cnt].items[k].color.join(" "))
+      create_li.setAttribute("size", arr[cnt].items[k].size.join(" "))
+      create_li.innerHTML =
+        `
+          <div>
+            <img src="${arr[cnt].items[k].img}" alt="이미지" />
+            <div class="hover-barrier">
+              <span>${arr[cnt].items[k].name}</span>
+              <span>${arr[cnt].items[k].price}</span>
+              <span>${arr[cnt].items[k].summary}</span>
+              <span>${arr[cnt].items[k].info}</span>
+              <div class="color-box"></div>
             </div>
-          </li>`
-      if(k == arr[cnt].items.length - 1) {
-        document.getElementById('items').children[cnt].innerHTML = layout_li;
-        layout_li = ""
+          </div>
+        `
+      for (let i = 0; i < arr[cnt].items[k].color.length; i++) {
+        let layout_span = document.createElement("span");
+        layout_span.className = `${arr[cnt].items[k].color[i]}`
+        create_li.children[0].children[1].children[4].appendChild(layout_span);
       }
+      create_ul.appendChild(create_li);
     }
 
     cnt++;
@@ -73,7 +80,7 @@ function create_layout(data) {
     let item_info = item.getAttribute("info");
     let item_color = item.getAttribute("color");
     let item_size = item.getAttribute("size");
-    let item_img = item.children[0].children[1].src;
+    let item_img = item.children[0].children[0].src;
 
     /* create */
     let li = document.createElement("li");
@@ -196,9 +203,7 @@ for(const hover of hover_barrier) {
 
 
 function product(cnt) {
-  location.href= 'html/product.html';
-  now_cookie("now", cnt);
-  
+
   let item = document.querySelector('.' + cnt);
   let name = item.getAttribute("name");
   let price = item.getAttribute("price");
@@ -206,17 +211,23 @@ function product(cnt) {
   let info = item.getAttribute("info");
   let color = item.getAttribute("color").split(' ');
   let size = item.getAttribute("size").split(' ');
-  let img = item.children[0].children[1].src;
-
+  let img = item.children[0].children[0].src;
+  
   set_cookie(cnt, name, price, summary, info, color, size, img);
+  now_cookie("now", cnt);
+
+  location.href= '/html/product.html';
 }
 
 
 function now_cookie(name, value) {
-  document.cookie = name + "=" + value;
+  document.cookie = name + "=" + value + ";Path=/html/product.html;"
 }
 function set_cookie(cnt, name, price, summary, info, color, size, img) {
   document.cookie = cnt + "=" +name + '|' + price + '|' + summary + '|' + info + '|' + color + '|' + size+ '|' + img;
+}
+function delete_cookie(name) {
+  document.cookie = name + '=;';
 }
 
 function get_cookie(cookie_name) {
@@ -231,4 +242,8 @@ function get_cookie(cookie_name) {
       return unescape(y); // unescape로 디코딩 후 값 리턴
     }
   }
+}
+
+function delete_cookie(name) {
+  document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
 }

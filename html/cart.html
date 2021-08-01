@@ -6,9 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 
-  <script src="/js/cart.js"></script>
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/css/cart.css">
+	<link rel="stylesheet" href="/common.css">
+	
+	<script defer src="/common.js"></script>
+  <script src="/js/cart.js"></script>
 </head>
 <body>
 	<main>
@@ -115,8 +118,8 @@
 						<form action="">
 							<fieldset class="search-field">
 								<legend>검색</legend>
-								<input type="text">
-								<i class="fa fa-search" aria-hidden="true"></i>
+								<input class="search-input" type="text">
+								<i class="fa fa-search search-btn" aria-hidden="true" id="aaa"></i>
 							</fieldset>
 						</form>
 					</div>

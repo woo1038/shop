@@ -3,10 +3,9 @@
 let search_btn = document.querySelector(".search-btn");
 let search_input = document.querySelector(".search-input");
 search_btn.addEventListener("click", function() {
-  location.href= 'html/search.html';
-
-  let value = document.querySelector(".search-input").value;
-  search_cookie("search", value);
+  delete_cookie("now");
+  // move_page()
+  // console.log(1);
 })
 
 function search_cookie(name, value) {
@@ -15,6 +14,12 @@ function search_cookie(name, value) {
 
 
 
+function move_page() {
+  let value = document.querySelector(".search-input").value;
+  search_cookie("search", value);
+
+  location.href= '/html/search.html';
+}
 
 var items = [];
 jsonArr(items);
@@ -66,6 +71,7 @@ function autocomplete(inp, arr) {
         if (currentFocus > -1) {
           if (x) x[currentFocus].click();
         }
+        move_page();
       } 
   });
   
@@ -120,3 +126,4 @@ function jsonArr(item) {
     }
   }
 }
+
