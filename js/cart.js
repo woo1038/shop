@@ -72,6 +72,7 @@ function create_box(cnt, name, option) {
         table_tr.appendChild(table_td);
         table_td.appendChild(div);
         a.innerHTML = get_name;
+        a.setAttribute("onclick", "product('" + name +"')");
         a.setAttribute("href", "#none");
         div.appendChild(a);
         div.appendChild(p);
@@ -253,6 +254,46 @@ function remove(cnt) {
 }
 
 
+function product(cnt) {
+  let item = document.querySelector('.' + cnt);
+  var xmlhttp = new XMLHttpRequest();
+  var url = "/data.json";
+
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      set_item(xmlhttp.responseText, item);
+    }
+  };
+
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
+
+  function set_item(data, item) {
+    let info_arr;
+    var arr = JSON.parse(data);
+    console.log(arr);
+    for(let i=0; i<arr.length; i++) {
+      for(let k=0; k<arr[i].items.length; k++) {
+        if(arr[i].items[k].class == item.classList[1]) {
+          info_arr = arr[i].items[k];
+        }
+      }
+    } 
+    let name = info_arr.name;
+    let price = info_arr.price;
+    let summary = info_arr.summary;
+    let info = info_arr.info;
+    let color = info_arr.color.join(" ");
+    let size = info_arr.size.join(" ");
+    let img = info_arr.img;
+
+    set_cookie(cnt, name, price, summary, info, color, size, img);
+  }
+  
+  now_cookie("now", cnt);
+  location.href= '/html/product.html';
+}
+
 
 /* ######################### checking ######################### */
 function total_price_all() {
@@ -362,7 +403,7 @@ function local_checking(cnt) {
 
 /* ######################### set cookie ######################### */
 function now_cookie(name, value) {
-  document.cookie = name + "=" + value;
+  document.cookie = name + "=" + value + ";Path=/html/product.html;"
 }
 
 function get_cookie(cookie_name) {
