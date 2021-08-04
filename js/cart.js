@@ -51,9 +51,9 @@ function create_box(cnt, name, option) {
       case 1:
         table_tr.appendChild(table_td);
         table_td.appendChild(div);
-        input.setAttribute("type", "checkbox")
-        input.setAttribute("name", "check")
-        input.setAttribute("type", "checkbox")
+        input.setAttribute("type", "checkbox");
+        input.setAttribute("name", "check");
+        input.setAttribute("type", "checkbox");
         div.appendChild(input);
         num += 1;
         break;
@@ -292,6 +292,13 @@ function product(cnt) {
   
   now_cookie("now", cnt);
   location.href= '/html/product.html';
+}
+
+function toogle_check(check) {
+  checkboxes = document.getElementsByName('check');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = check.checked;
+  }
 }
 
 
